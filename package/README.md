@@ -8,7 +8,7 @@ Synchronous scrolling of multiple scrollable widgets.
 
 For example:
 
-![](../screenshots/demo.gif)
+![](https://github.com/andyduke/sync_scroll/blob/master/screenshots/demo.gif)
 
 ```dart
 DefaultSyncScrollController(
