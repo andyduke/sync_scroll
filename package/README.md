@@ -28,6 +28,7 @@ DefaultSyncScrollController(
             itemBuilder: (context, index) => Container(
               width: 80,
               height: 60,
+              alignment: Alignment.center,
               child: Text('Cell $index'),
             ),
           ),
@@ -49,6 +50,7 @@ DefaultSyncScrollController(
             itemBuilder: (context, index) => Container(
               width: 80,
               height: 60,
+              alignment: Alignment.center,
               child: Text('Cell $index'),
             ),
           ),

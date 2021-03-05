@@ -1,7 +1,11 @@
 import 'package:flutter/widgets.dart';
 
+/// Controls a synchronous scrollable widgets through their scroll controllers.
+///
+/// Can be used implicitly by wrapping multiple scrollable widgets in
+/// the [DefaultSyncScrollController].
 class SyncScrollController {
-  List<ScrollController> _registeredScrollControllers = new List<ScrollController>();
+  List<ScrollController> _registeredScrollControllers = <ScrollController>[];
 
   ScrollController _scrollingController;
   bool _scrollingActive = false;
@@ -12,6 +16,7 @@ class SyncScrollController {
     }
   }
 
+  /// The current scroll offset of the scrollable widgets.
   double get scrollOffset {
     if (_registeredScrollControllers.isEmpty) return 0.0;
 
@@ -21,14 +26,17 @@ class SyncScrollController {
     return controller.offset ?? 0.0;
   }
 
+  /// Add a scroll controller for synchronous control.
   void add(ScrollController controller) {
     registerScrollController(controller);
   }
 
+  /// Remove the scroll controller from synchronous control.
   void remove(ScrollController controller) {
     _registeredScrollControllers.remove(controller);
   }
 
+  @protected
   void registerScrollController(ScrollController controller) {
     _registeredScrollControllers.add(controller);
   }

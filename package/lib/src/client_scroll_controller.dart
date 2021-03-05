@@ -1,8 +1,40 @@
 import 'package:flutter/widgets.dart';
 import 'sync_scroll_controller_scope.dart';
 
+typedef ClientScrollControllerBuilder = Widget Function(BuildContext context, ScrollController controller);
+
+/// Provides a scroll controller and synchronizes its scrolling
+/// with the [SyncScrollController].
+///
+/// ```
+/// DefaultSyncScrollController(
+///   child: Column(
+///     crossAxisAlignment: CrossAxisAlignment.stretch,
+///     children: [
+///       ClientScrollController(
+///         builder: (context, controller) => ListView.builder(
+///           controller: controller,
+///           scrollDirection: Axis.horizontal,
+///           itemCount: 20,
+///           itemBuilder: (context, index) => Container(width: 80, height: 60, alignment: Alignment.center, child: Text('Cell $index')),
+///         ),
+///       ),
+///       const Divider(),
+///       ClientScrollController(
+///         builder: (context, controller) => ListView.builder(
+///           controller: controller,
+///           scrollDirection: Axis.horizontal,
+///           itemCount: 20,
+///           itemBuilder: (context, index) => Container(width: 80, height: 60, alignment: Alignment.center, child: Text('Cell $index')),
+///         ),
+///       ),
+///     ],
+///   ),
+/// )
+/// ```
 class ClientScrollController extends StatefulWidget {
-  final Widget Function(BuildContext context, ScrollController controller) builder;
+  /// Called to obtain the child widget and provide a scroll controller to it.
+  final ClientScrollControllerBuilder builder;
 
   const ClientScrollController({
     Key key,
