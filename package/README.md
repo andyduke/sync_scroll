@@ -12,7 +12,7 @@ For example:
 
 ```dart
 DefaultSyncScrollController(
-  Column(
+  child: Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
       // First ListView

@@ -1,4 +1,4 @@
-## 2.0.0+1
+## 2.0.0+2
 
 * Null-safety migration.
 * Fixed sync issue with overscroll.

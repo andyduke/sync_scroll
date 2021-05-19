@@ -1,6 +1,6 @@
 name: sync_scroll
 description: SyncScroll allows you to make synchronous scrolling of two or more scrollable widgets, for example, two horizontal ListView.
-version: 2.0.0+1
+version: 2.0.0+2
 author: Andy Chentsov <chentsov@gmail.com>
 homepage: https://github.com/andyduke/sync_scroll/tree/master/package
 repository: https://github.com/andyduke/sync_scroll
