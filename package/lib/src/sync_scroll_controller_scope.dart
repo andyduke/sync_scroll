@@ -13,12 +13,14 @@ class SyncScrollControllerScope extends InheritedWidget {
   }) : super(key: key, child: child);
 
   static SyncScrollController? of(BuildContext context) {
-    final SyncScrollControllerScope? result = context.dependOnInheritedWidgetOfExactType<SyncScrollControllerScope>();
+    final SyncScrollControllerScope? result =
+        context.dependOnInheritedWidgetOfExactType<SyncScrollControllerScope>();
     return result?.controller;
   }
 
   @override
-  bool updateShouldNotify(SyncScrollControllerScope oldWidget) => controller != oldWidget.controller;
+  bool updateShouldNotify(SyncScrollControllerScope oldWidget) =>
+      controller != oldWidget.controller;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

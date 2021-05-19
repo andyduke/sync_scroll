@@ -21,7 +21,8 @@ class SyncScrollController {
   double get scrollOffset {
     if (_registeredScrollControllers.isEmpty) return 0.0;
 
-    final ScrollController? controller = _registeredScrollControllers.firstWhereOrNull((c) => c.hasClients);
+    final ScrollController? controller =
+        _registeredScrollControllers.firstWhereOrNull((c) => c.hasClients);
     if (controller == null) return 0.0;
 
     return controller.offset;
@@ -42,7 +43,8 @@ class SyncScrollController {
     _registeredScrollControllers.add(controller);
   }
 
-  void processNotification(ScrollNotification notification, ScrollController sender) {
+  void processNotification(
+      ScrollNotification notification, ScrollController sender) {
     if (notification is ScrollStartNotification && !_scrollingActive) {
       _scrollingController = sender;
       _scrollingActive = true;
@@ -51,17 +53,37 @@ class SyncScrollController {
 
     if (identical(sender, _scrollingController) && _scrollingActive) {
       if (notification is ScrollEndNotification) {
+        _registeredScrollControllers.forEach((controller) {
+          if (!identical(_scrollingController, controller)) {
+            if (controller.hasClients)
+              controller.position.jumpTo(_scrollingController!.offset);
+          }
+        });
+
         _scrollingController = null;
         _scrollingActive = false;
         return;
       }
 
-      if ((notification is ScrollUpdateNotification) && (_scrollingController != null)) {
+      if ((notification is ScrollUpdateNotification) &&
+          (_scrollingController != null)) {
         _registeredScrollControllers.forEach((controller) {
-          if (!identical(_scrollingController, controller)) controller..jumpTo(_scrollingController!.offset);
+          if (!identical(_scrollingController, controller)) {
+            // TODO: Refactor - get rid of jumpToWithoutSettling
+            if (controller.hasClients)
+              controller.position.jumpToWithoutSettling(_scrollingController!
+                  .offset); // ignore: deprecated_member_use
+            // controller.jumpTo(_scrollingController!.offset);
+          }
         });
         return;
       }
     }
+  }
+
+  void processOverscrollNotification(
+      OverscrollNotification notification, ScrollController sender) {
+    // TODO:
+    debugPrint('Overscroll: $notification');
   }
 }

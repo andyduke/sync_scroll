@@ -1,7 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'sync_scroll_controller_scope.dart';
 
-typedef ClientScrollControllerBuilder = Widget Function(BuildContext context, ScrollController controller);
+typedef ClientScrollControllerBuilder = Widget Function(
+    BuildContext context, ScrollController controller);
 
 /// Provides a scroll controller and synchronizes its scrolling
 /// with the [SyncScrollController].
@@ -54,7 +55,8 @@ class _ClientScrollControllerState extends State<ClientScrollController> {
     super.didChangeDependencies();
 
     if (controller == null) {
-      final double currentScrollOffset = SyncScrollControllerScope.of(context)?.scrollOffset ?? 0;
+      final double currentScrollOffset =
+          SyncScrollControllerScope.of(context)?.scrollOffset ?? 0;
       controller = ScrollController(
         initialScrollOffset: currentScrollOffset,
       );
@@ -89,7 +91,8 @@ class _ClientScrollControllerState extends State<ClientScrollController> {
   Widget build(BuildContext context) {
     return NotificationListener<ScrollNotification>(
       onNotification: (ScrollNotification scrollInfo) {
-        SyncScrollControllerScope.of(context)?.processNotification(scrollInfo, controller!);
+        SyncScrollControllerScope.of(context)
+            ?.processNotification(scrollInfo, controller!);
         return false;
       },
       child: child!,
