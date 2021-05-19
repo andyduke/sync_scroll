@@ -1,3 +1,7 @@
-## [0.0.1] - TODO: Add release date.
+## 2.0.0
 
-* TODO: Describe initial release.
+* Null-safety migration.
+
+## 1.0.0
+
+* Initial version.

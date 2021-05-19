@@ -7,13 +7,13 @@ class SyncScrollControllerScope extends InheritedWidget {
   final Widget child;
 
   SyncScrollControllerScope({
-    Key key,
-    @required this.controller,
-    @required this.child,
+    Key? key,
+    required this.controller,
+    required this.child,
   }) : super(key: key, child: child);
 
-  static SyncScrollController of(BuildContext context) {
-    final SyncScrollControllerScope result = context.dependOnInheritedWidgetOfExactType<SyncScrollControllerScope>();
+  static SyncScrollController? of(BuildContext context) {
+    final SyncScrollControllerScope? result = context.dependOnInheritedWidgetOfExactType<SyncScrollControllerScope>();
     return result?.controller;
   }
 
@@ -23,7 +23,11 @@ class SyncScrollControllerScope extends InheritedWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(
-        DiagnosticsProperty<SyncScrollController>('controller', controller, ifNull: 'no controller', showName: false));
+    properties.add(DiagnosticsProperty<SyncScrollController>(
+      'controller',
+      controller,
+      ifNull: 'no controller',
+      showName: false,
+    ));
   }
 }

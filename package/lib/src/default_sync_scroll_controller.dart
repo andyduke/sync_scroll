@@ -11,15 +11,17 @@ class DefaultSyncScrollController extends StatefulWidget {
   final Widget child;
 
   const DefaultSyncScrollController({
-    Key key,
-    @required this.child,
+    Key? key,
+    required this.child,
   }) : super(key: key);
 
   @override
-  _DefaultSyncScrollControllerState createState() => _DefaultSyncScrollControllerState();
+  _DefaultSyncScrollControllerState createState() =>
+      _DefaultSyncScrollControllerState();
 }
 
-class _DefaultSyncScrollControllerState extends State<DefaultSyncScrollController> {
+class _DefaultSyncScrollControllerState
+    extends State<DefaultSyncScrollController> {
   final SyncScrollController _controller = SyncScrollController();
 
   @override

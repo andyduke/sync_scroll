@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/widgets.dart';
 
 /// Controls a synchronous scrollable widgets through their scroll controllers.
@@ -7,10 +8,10 @@ import 'package:flutter/widgets.dart';
 class SyncScrollController {
   List<ScrollController> _registeredScrollControllers = <ScrollController>[];
 
-  ScrollController _scrollingController;
+  ScrollController? _scrollingController;
   bool _scrollingActive = false;
 
-  SyncScrollController([List<ScrollController> controllers]) {
+  SyncScrollController([List<ScrollController>? controllers]) {
     if (controllers != null) {
       controllers.forEach((controller) => registerScrollController(controller));
     }
@@ -20,10 +21,10 @@ class SyncScrollController {
   double get scrollOffset {
     if (_registeredScrollControllers.isEmpty) return 0.0;
 
-    final ScrollController controller = _registeredScrollControllers.firstWhere((c) => c.hasClients);
+    final ScrollController? controller = _registeredScrollControllers.firstWhereOrNull((c) => c.hasClients);
     if (controller == null) return 0.0;
 
-    return controller.offset ?? 0.0;
+    return controller.offset;
   }
 
   /// Add a scroll controller for synchronous control.
@@ -55,9 +56,9 @@ class SyncScrollController {
         return;
       }
 
-      if (notification is ScrollUpdateNotification) {
+      if ((notification is ScrollUpdateNotification) && (_scrollingController != null)) {
         _registeredScrollControllers.forEach((controller) {
-          if (!identical(_scrollingController, controller)) controller..jumpTo(_scrollingController.offset);
+          if (!identical(_scrollingController, controller)) controller..jumpTo(_scrollingController!.offset);
         });
         return;
       }
